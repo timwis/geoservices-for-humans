@@ -27,6 +27,10 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "ampersand-model": "^6.0.2",
+    "ampersand-rest-collection": "^5.0.0",
+    "ampersand-state": "^5.0.0",
+    "ampersand-view": "^9.0.2",
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.0",
     "lodash": "^4.1.0"

@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="heading-{{ this.cid }}">
+    <h4 class="panel-title">
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ this.cid }}" aria-expanded="false" aria-controls="#collapse-{{ this.cid }}">
+        {{ this.model.name }}
+      </a>
+    </h4>
+  </div>
+  <div data-field="{{ this.name }}" id="collapse-{{ this.cid }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{ this.cid }}">
+    <div class="panel-body">
+      <p><code>{{ this.model.name }}</code> is a <code>{{ this.model.type }}</code> field.</p>
+      <h4>Example request</h4>
+      <div class="sample-url alert alert-warning dont-break-out"></div>
+      <pre class="sample-results dont-break-out"></pre>
+    </div>
+  </div>
+</div>
