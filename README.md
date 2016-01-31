@@ -1,5 +1,6 @@
 # GeoServices for Humans
-Human-friendly documentation of Esri GeoServices (work in progress)
+Human-friendly documentation of Esri GeoServices (work in progress).
+[Demo](http://geoservices-for-humans.surge.sh/).
 
 ## Development
 1. Clone this repo and install dependencies via `npm install`
