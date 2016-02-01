@@ -80,11 +80,9 @@ function constructSampleUrl (serviceUrl, field, friendlyType, sampleValue) {
     outFields: '*'
   }
   const sampleQueryString = $.param(sampleQuery)
-  
+
   return `${serviceUrl}/query?${sampleQueryString}`
 }
 
 function enclose (value, friendlyType) {
-  var nonQuotedTypes = ['integer', 'objectid', 'double']
-  return nonQuotedTypes.includes(friendlyType) ? value : `'${value}'`
 }

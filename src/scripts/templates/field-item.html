@@ -8,9 +8,12 @@
   </div>
   <div data-field="{{ this.name }}" id="collapse-{{ this.cid }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{ this.cid }}">
     <div class="panel-body">
-      <p><code>{{ this.model.name }}</code> is a <code>{{ this.model.type }}</code> field.</p>
+      <p><code>{{ this.model.name }}</code> is a <code>{{ this.model.friendlyType }}</code> field.</p>
       <h4>Example request</h4>
-      <div class="sample-url alert alert-warning dont-break-out"></div>
+      <div class="sample-url alert alert-warning dont-break-out">
+        <div>{{ this.model.name }} = <span class="sample-value"></span></div>
+        <a></a>
+      </div>
       <pre class="sample-results dont-break-out"></pre>
     </div>
   </div>
