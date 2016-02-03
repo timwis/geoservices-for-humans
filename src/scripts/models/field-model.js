@@ -24,6 +24,8 @@ const FieldModel = State.extend({
     sampleUrl: {
       deps: ['sampleValue', 'name', 'friendlyType', 'serviceUrl'],
       fn: function () {
+        if (!this.sampleValue) return
+
         const sampleQuery = {
           where: `${this.name} = ${this.enclose(this.sampleValue, this.friendlyType)}`,
           f: 'json',
