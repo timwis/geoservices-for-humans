@@ -11,7 +11,8 @@ const FieldItemView = View.extend({
     'sampleUrl': 'string'
   },
   bindings: {
-    'sampleUrl': [
+    'model.sampleValue': '.sample-value',
+    'model.sampleUrl': [
       {
         type: 'text',
         selector: '.sample-url a'
@@ -21,17 +22,10 @@ const FieldItemView = View.extend({
         name: 'href',
         selector: '.sample-url a'
       }
-    ],
-    'model.sampleValue': { // TODO: Not sure which of these 2 approaches is best
-      selector: '.sample-value',
-      type: function (el, value, previousValue) {
-        value.then((sampleValue) => el.innerHTML = this.model.enclose(sampleValue, this.model.friendlyType))
-      }
-    }
+    ]
   },
   onToggle: function (e) {
-    // const isShown = !this.el.querySelector('.collapse').className.includes('in')
-    this.model.sampleUrl.then((sampleUrl) => this.sampleUrl = sampleUrl)
+    this.model.getSampleValue().then((sampleValue) => this.model.sampleValue = sampleValue)
     e.preventDefault()
   }
 })

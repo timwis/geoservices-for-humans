@@ -6,6 +6,9 @@ const FieldModel = State.extend({
     name: 'string',
     type: 'string'
   },
+  session: {
+    sampleValue: 'any'
+  },
   derived: {
     friendlyType: {
       deps: ['type'],
@@ -18,34 +21,17 @@ const FieldModel = State.extend({
         return this.collection.parent.serviceUrl
       }
     },
-    sampleValue: {
-      deps: ['serviceUrl', 'name'],
-      fn: function () {
-        return $.ajax({
-          url: this.serviceUrl + '/query',
-          dataType: 'json',
-          data: {
-            f: 'json',
-            outFields: this.name,
-            where: `${this.name} IS NOT NULL`,
-            resultRecordCount: 1
-          }
-        }).then((response) => response.features.length && response.features[0].attributes[this.name])
-      }
-    },
     sampleUrl: {
       deps: ['sampleValue', 'name', 'friendlyType', 'serviceUrl'],
       fn: function () {
-        return this.sampleValue.then((sampleValue) => {
-          const sampleQuery = {
-            where: `${this.name} = ${this.enclose(sampleValue, this.friendlyType)}`,
-            f: 'json',
-            outFields: '*'
-          }
-          const sampleQueryString = $.param(sampleQuery)
+        const sampleQuery = {
+          where: `${this.name} = ${this.enclose(this.sampleValue, this.friendlyType)}`,
+          f: 'json',
+          outFields: '*'
+        }
+        const sampleQueryString = $.param(sampleQuery)
 
-          return `${this.serviceUrl}/query?${sampleQueryString}`
-        })
+        return `${this.serviceUrl}/query?${sampleQueryString}`
       }
     }
   },
@@ -57,6 +43,18 @@ const FieldModel = State.extend({
     esriFieldTypeGlobalID: 'globalid',
     esriFieldTypeGeometry: 'geometry',
     esriFieldTypeDouble: 'double'
+  },
+  getSampleValue: function () {
+    return $.ajax({
+      url: this.serviceUrl + '/query',
+      dataType: 'json',
+      data: {
+        f: 'json',
+        outFields: this.name,
+        where: `${this.name} IS NOT NULL`,
+        resultRecordCount: 1
+      }
+    }).then((response) => response.features.length && response.features[0].attributes[this.name])
   },
   enclose: function (value, friendlyType) {
     var nonQuotedTypes = ['integer', 'objectid', 'double']
