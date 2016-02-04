@@ -33,11 +33,13 @@ const FieldItemView = View.extend({
     ]
   },
   onToggle: function (e) {
-    this.model.getSampleValue().then((sampleValue) => this.model.sampleValue = sampleValue)
+    if (!this.model.sampleValue) {
+      this.model.getSampleValue().then((sampleValue) => this.model.sampleValue = sampleValue)
+    }
     e.preventDefault()
   },
   onClickSampleUrl: function (e) {
-    this.el.querySelector('.sample-result').style.display = 'block'
+    this.queryByHook('sample-result').style.display = 'block'
     $.getJSON(this.model.sampleUrl, (result) => this.sampleResult = result)
     e.preventDefault()
   }

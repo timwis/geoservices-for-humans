@@ -10,7 +10,7 @@ const FieldListView = View.extend({
   render: function (opts) {
     this.renderWithTemplate(this)
 
-    const collectionContainer = this.el.querySelector('#accordion')
+    const collectionContainer = this.queryByHook('field-items')
     this.renderCollection(this.model.fields, this.itemView, collectionContainer, opts)
 
     return this
