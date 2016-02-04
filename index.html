@@ -5,23 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GeoServices Docs</title>
 
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="./src/styles/main.css">
   </head>
   <body>
-    <div class="container">
-      <form>
-        <label for="service-url">Service URL</label>
-        <div class="input-group">
-          <input id="service-url" class="form-control" value="https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/Incidents_2006/FeatureServer/0">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit" aria-label="Search"><span class="glyphicon glyphicon-search"></span></button>
-          </span>
-        </div>
-      </form>
-      <div id="fields"></div>
-    </div>
+    <div id="main" class="container"></div>
+
     <script src="./dist/bundle.js"></script>
   </body>
 </html>
