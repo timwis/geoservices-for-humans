@@ -1,5 +1,9 @@
-import FieldContainerView from './views/field-container-view'
+import LayerModel from './models/layer-model'
+import PageLayoutView from './views/page-layout-view'
 
-var fieldContainerView = new FieldContainerView()
-fieldContainerView.serviceUrl = 'https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/Incidents_2006/FeatureServer/0'
-document.querySelector('#main').appendChild(fieldContainerView.render().el)
+const defaultServiceUrl = 'https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/Incidents_2006/FeatureServer/0'
+const layer = new LayerModel(null, {serviceUrl: defaultServiceUrl})
+layer.fetch()
+
+const pageLayoutView = new PageLayoutView({model: layer})
+document.querySelector('#main').appendChild(pageLayoutView.render().el)
