@@ -12,7 +12,12 @@ const FieldListView = View.extend({
     'change [data-hook=field-selected]': 'onChangeFieldSelected'
   },
   onChangeFieldSelected: function (e) {
-    var selectedFields = this.queryAll('[data-hook=field-selected]:checked').map((el) => el.value)
+    let selectedFields = []
+    const allFieldsAreSelected = !this.queryAll('[data-hook=field-selected]:not(:checked)').length
+
+    if (!allFieldsAreSelected) {
+      selectedFields = this.queryAll('[data-hook=field-selected]:checked').map((el) => el.value)
+    }
     EventBus.trigger('fieldSelectionChange', selectedFields)
   },
   render: function (opts) {

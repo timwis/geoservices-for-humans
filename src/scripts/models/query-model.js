@@ -9,16 +9,8 @@ const QueryModel = State.extend({
   session: {
     whereFilters: ['object', false, function () { return {} }]
   },
-  derived: {
-    totalFields: {
-      deps: ['parent.fields'],
-      fn: function () {
-        return this.parent.fields.length
-      }
-    }
-  },
   setOutFields: function (fields) {
-    this.outFields = !fields || fields.length === this.totalFields ? '*' : fields.join(', ')
+    this.outFields = !fields.length ? '*' : fields.join(', ')
   },
   setWhereFilter: function (field, filter) {
     if (filter) {

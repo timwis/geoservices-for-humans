@@ -16,16 +16,18 @@ const PageLayoutView = View.extend({
       hook: 'service-url'
     }
   },
-  initialize: function () {
+  initialize: function (opts) {
+    opts = opts || {}
+    this.queryModel = opts.queryModel
     this.listenTo(EventBus, 'filter', this.onFilter)
     this.listenTo(EventBus, 'fieldSelectionChange', this.onFieldSelectionChange)
   },
   onFilter: function (fieldModel, operator, value) {
     const filter = operator && value ? `${fieldModel.name} ${operator} ${value}` : ''
-    this.model.query.setWhereFilter(fieldModel.name, filter)
+    this.queryModel.setWhereFilter(fieldModel.name, filter)
   },
   onFieldSelectionChange: function (selectedFields) {
-    this.model.query.setOutFields(selectedFields)
+    this.queryModel.setOutFields(selectedFields)
   },
   events: {
     'submit form': 'onSubmitForm'
@@ -45,7 +47,7 @@ const PageLayoutView = View.extend({
     preview: {
       selector: '[data-hook=preview]',
       prepareView: function () {
-        return new QueryView({model: this.model.query})
+        return new QueryView({model: this.queryModel})
       }
     }
   }
