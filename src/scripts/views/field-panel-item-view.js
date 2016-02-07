@@ -2,10 +2,10 @@ import View from 'ampersand-view'
 import $ from 'jquery'
 
 import EventBus from '../event-bus'
-import FieldItemTemplate from '../templates/field-item.html'
+import FieldPanelItemTemplate from '../templates/field-panel-item.html'
 
-const FieldItemView = View.extend({
-  template: FieldItemTemplate,
+const FieldPanelItemView = View.extend({
+  template: FieldPanelItemTemplate,
   props: {
     'sampleResult': 'object'
   },
@@ -41,8 +41,9 @@ const FieldItemView = View.extend({
   },
   events: {
     'click [data-toggle="collapse"]': 'onToggle',
-    'click .sample-url a': 'onClickSampleUrl',
-    'change [data-hook^=filter]': 'onChangeFilterValue'
+    'click [data-hook=sample-url]': 'onClickSampleUrl',
+    'change [data-hook=filter-operator]': 'onChangeFilterValue',
+    'change [data-hook=filter-value]': 'onChangeFilterValue'
   },
   onToggle: function (e) {
     if (!this.model.sampleValue) {
@@ -62,4 +63,4 @@ const FieldItemView = View.extend({
   }
 })
 
-export default FieldItemView
+export default FieldPanelItemView

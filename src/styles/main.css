@@ -22,3 +22,7 @@
   height: 300px;
   overflow-y: scroll;
 }
+
+.service-url-form {
+  margin-bottom: 20px;
+}

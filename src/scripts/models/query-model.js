@@ -4,7 +4,9 @@ import {isEmpty, values, clone} from 'lodash'
 const QueryModel = State.extend({
   props: {
     outFields: ['string', true, '*'],
-    where: ['string', true, '1=1']
+    where: ['string', true, '1=1'],
+    groupByFieldsForStatistics: 'string',
+    outStatistics: 'string'
   },
   session: {
     whereFilters: ['object', false, function () { return {} }]
@@ -19,6 +21,16 @@ const QueryModel = State.extend({
       delete this.whereFilters[field]
     }
     this.where = isEmpty(this.whereFilters) ? '1=1' : values(this.whereFilters).join(' AND ')
+  },
+  setGroupBy: function (groupBy) {
+    this.groupByFieldsForStatistics = groupBy
+  },
+  setAggregation: function (aggregationFunction, aggregationField) {
+    this.outStatistics = aggregationFunction && aggregationField ? JSON.stringify([{
+      statisticType: aggregationFunction,
+      onStatisticField: aggregationField,
+      outStatisticFieldName: `${aggregationField}_${aggregationFunction}`
+    }]) : ''
   }
 })
 

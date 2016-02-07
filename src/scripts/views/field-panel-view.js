@@ -2,12 +2,12 @@ import View from 'ampersand-view'
 import 'bootstrap/js/collapse'
 
 import EventBus from '../event-bus'
-import FieldItemView from './field-item-view'
-import FieldListTemplate from '../templates/field-list.html'
+import FieldPanelItemView from './field-panel-item-view'
+import FieldPanelTemplate from '../templates/field-panel.html'
 
-const FieldListView = View.extend({
-  template: FieldListTemplate,
-  itemView: FieldItemView,
+const FieldPanelView = View.extend({
+  template: FieldPanelTemplate,
+  itemView: FieldPanelItemView,
   events: {
     'change [data-hook=field-selected]': 'onChangeFieldSelected'
   },
@@ -18,7 +18,7 @@ const FieldListView = View.extend({
     if (!allFieldsAreSelected) {
       selectedFields = this.queryAll('[data-hook=field-selected]:checked').map((el) => el.value)
     }
-    EventBus.trigger('fieldSelectionChange', selectedFields)
+    EventBus.trigger('changeFieldSelection', selectedFields)
   },
   render: function (opts) {
     this.renderWithTemplate(this)
@@ -30,4 +30,4 @@ const FieldListView = View.extend({
   }
 })
 
-export default FieldListView
+export default FieldPanelView

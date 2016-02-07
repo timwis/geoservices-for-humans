@@ -1,0 +1,31 @@
+<div>
+  <form>
+    <div class="form-group">
+      <label for="groupBy">Group by</label>
+      <select name="groupBy" id="groupBy" class="form-control" data-hook="group-by">
+        <option value="">Select...</option>
+        {{#each this.fields}}
+        <option>{{ this.name }}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="aggregation-function">Function</label>
+      <select name="aggregation-function" id="aggregation-function" class="form-control" data-hook="aggregation-function">
+        <option value="">Select...</option>
+        {{#each this.aggregationFunctions}}
+        <option>{{ this }}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="aggregation-field">Field</label>
+      <select name="aggregation-field" id="aggregation-field" class="form-control" data-hook="aggregation-field">
+        <option value="">Select...</option>
+        {{#each this.fields}}
+        <option>{{ this.name }}</option>
+        {{/each}}
+      </select>
+    </div>
+  </form>
+</div>
