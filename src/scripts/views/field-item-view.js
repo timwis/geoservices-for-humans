@@ -1,36 +1,48 @@
 import View from 'ampersand-view'
 import $ from 'jquery'
 
+import EventBus from '../event-bus'
 import FieldItemTemplate from '../templates/field-item.html'
 
 const FieldItemView = View.extend({
   template: FieldItemTemplate,
-  events: {
-    'click [data-toggle="collapse"]': 'onToggle',
-    'click .sample-url a': 'onClickSampleUrl'
-  },
   props: {
     'sampleResult': 'object'
   },
   bindings: {
     'sampleResult': {
-      'selector': '.sample-result',
+      'hook': 'sample-result',
       'type': (el, value, previousValue) => {
         if (value) el.innerText = JSON.stringify(value, null, 2)
       }
     },
-    'model.sampleValue': '.sample-value',
+    'model.sampleValue': [
+      {
+        type: 'text',
+        hook: 'sample-value'
+      },
+      {
+        type: 'attribute',
+        name: 'placeholder',
+        hook: 'filter-value'
+      }
+    ],
     'model.sampleUrl': [
       {
         type: 'text',
-        selector: '.sample-url a'
+        hook: 'sample-url'
       },
       {
         type: 'attribute',
         name: 'href',
-        selector: '.sample-url a'
+        hook: 'sample-url'
       }
     ]
+  },
+  events: {
+    'click [data-toggle="collapse"]': 'onToggle',
+    'click .sample-url a': 'onClickSampleUrl',
+    'change [data-hook^=filter]': 'onChangeFilterValue'
   },
   onToggle: function (e) {
     if (!this.model.sampleValue) {
@@ -42,6 +54,11 @@ const FieldItemView = View.extend({
     this.queryByHook('sample-result').style.display = 'block'
     $.getJSON(this.model.sampleUrl, (result) => this.sampleResult = result)
     e.preventDefault()
+  },
+  onChangeFilterValue: function (e) {
+    const operator = this.queryByHook('filter-operator').value
+    const value = this.queryByHook('filter-value').value
+    EventBus.trigger('filter', this.model, operator, value)
   }
 })
 

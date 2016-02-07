@@ -10,12 +10,32 @@
   <div data-field="{{ this.name }}" id="collapse-{{ this.cid }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{ this.cid }}">
     <div class="panel-body">
       <p><code>{{ this.model.name }}</code> is a <code>{{ this.model.friendlyType }}</code> field.</p>
+
       <h4>Example request</h4>
       <div class="sample-url alert alert-warning dont-break-out">
-        <div>{{ this.model.name }} = <span class="sample-value"></span></div>
-        <a></a>
+        <div>{{ this.model.name }} = <span data-hook="sample-value"></span></div>
+        <a data-hook="sample-url"></a>
       </div>
       <pre data-hook="sample-result" class="sample-result dont-break-out"></pre>
+
+      <h4>Filters</h4>
+      <form class="form-inline">
+        <div class="form-group">
+          <code>{{ this.model.name }}</code>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="operator">Operator</label>
+          <select name="operator" id="operator" class="form-control" data-hook="filter-operator">
+            <option>=</option>
+            <option>&lt;</option>
+            <option>&gt;</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="value">Value</label>
+          <input type="text" class="form-control" id="value" data-hook="filter-value">
+        </div>
+      </form>
     </div>
   </div>
 </div>

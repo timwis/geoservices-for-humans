@@ -1,5 +1,6 @@
 import View from 'ampersand-view'
 
+import EventBus from '../event-bus'
 import FieldListView from './field-list-view'
 import QueryView from './query-view'
 import PageLayoutTemplate from '../templates/page-layout.html'
@@ -9,14 +10,25 @@ const PageLayoutView = View.extend({
   props: {
     serviceUrl: 'string'
   },
-  events: {
-    'submit form': 'onSubmitForm'
-  },
   bindings: {
     'model.serviceUrl': {
       type: 'value',
       hook: 'service-url'
     }
+  },
+  initialize: function () {
+    this.listenTo(EventBus, 'filter', this.onFilter)
+    this.listenTo(EventBus, 'fieldSelectionChange', this.onFieldSelectionChange)
+  },
+  onFilter: function (fieldModel, operator, value) {
+    const filter = operator && value ? `${fieldModel.name} ${operator} ${value}` : ''
+    this.model.query.setWhereFilter(fieldModel.name, filter)
+  },
+  onFieldSelectionChange: function (selectedFields) {
+    this.model.query.setOutFields(selectedFields)
+  },
+  events: {
+    'submit form': 'onSubmitForm'
   },
   onSubmitForm: function (e) {
     this.model.serviceUrl = this.queryByHook('service-url').value

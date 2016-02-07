@@ -1,6 +1,7 @@
 import View from 'ampersand-view'
 import 'bootstrap/js/collapse'
 
+import EventBus from '../event-bus'
 import FieldItemView from './field-item-view'
 import FieldListTemplate from '../templates/field-list.html'
 
@@ -12,7 +13,7 @@ const FieldListView = View.extend({
   },
   onChangeFieldSelected: function (e) {
     var selectedFields = this.queryAll('[data-hook=field-selected]:checked').map((el) => el.value)
-    this.model.query.selectedFields = selectedFields
+    EventBus.trigger('fieldSelectionChange', selectedFields)
   },
   render: function (opts) {
     this.renderWithTemplate(this)

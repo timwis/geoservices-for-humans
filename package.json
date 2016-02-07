@@ -33,6 +33,6 @@
     "ampersand-view": "^9.0.2",
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.0",
-    "lodash": "^4.1.0"
+    "lodash": "^4.2.1"
   }
 }
