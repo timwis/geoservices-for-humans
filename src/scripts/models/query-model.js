@@ -1,15 +1,31 @@
 import State from 'ampersand-state'
-import {isEmpty, values, clone} from 'lodash'
+import {isEmpty, values} from 'lodash'
+import $ from 'jquery'
 
 const QueryModel = State.extend({
   props: {
     outFields: ['string', true, '*'],
     where: ['string', true, '1=1'],
     groupByFieldsForStatistics: 'string',
-    outStatistics: 'string'
+    outStatistics: 'string',
+    f: ['string', true, 'json']
   },
   session: {
+    serviceUrl: 'string',
     whereFilters: ['object', false, function () { return {} }]
+  },
+  derived: {
+    queryUrl: {
+      deps: ['outFields', 'where', 'groupByFieldsForStatistics', 'outStatistics'],
+      fn: function () {
+        const params = $.param(this.serialize())
+        return `${this.serviceUrl}/query?${params}`
+      }
+    }
+  },
+  initialize: function (attr, opts) {
+    opts = opts || {}
+    this.serviceUrl = opts.serviceUrl
   },
   setOutFields: function (fields) {
     this.outFields = !fields.length ? '*' : fields.join(', ')
