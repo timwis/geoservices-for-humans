@@ -17,7 +17,7 @@
   hyphens: auto;
 }
 
-.sample-result {
+.query-result {
   display: none;
   height: 300px;
   overflow-y: scroll;
