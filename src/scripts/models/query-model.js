@@ -16,7 +16,7 @@ const QueryModel = State.extend({
   },
   derived: {
     queryUrl: {
-      deps: ['outFields', 'where', 'groupByFieldsForStatistics', 'outStatistics'],
+      deps: ['serviceUrl', 'outFields', 'where', 'groupByFieldsForStatistics', 'outStatistics'],
       fn: function () {
         const params = $.param(this.serialize())
         return `${this.serviceUrl}/query?${params}`

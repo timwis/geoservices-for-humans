@@ -42,7 +42,7 @@ const PageLayoutView = View.extend({
     'submit form': 'onSubmitForm'
   },
   onSubmitForm: function (e) {
-    this.model.serviceUrl = this.queryByHook('service-url').value
+    this.model.serviceUrl = this.queryModel.serviceUrl = this.queryByHook('service-url').value
     this.model.fetch()
     e.preventDefault()
   },
