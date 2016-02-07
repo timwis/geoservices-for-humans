@@ -7,6 +7,13 @@ import FieldListTemplate from '../templates/field-list.html'
 const FieldListView = View.extend({
   template: FieldListTemplate,
   itemView: FieldItemView,
+  events: {
+    'change [data-hook=field-selected]': 'onChangeFieldSelected'
+  },
+  onChangeFieldSelected: function (e) {
+    var selectedFields = this.queryAll('[data-hook=field-selected]:checked').map((el) => el.value)
+    this.model.query.selectedFields = selectedFields
+  },
   render: function (opts) {
     this.renderWithTemplate(this)
 

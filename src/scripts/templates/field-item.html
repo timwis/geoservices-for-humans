@@ -1,6 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading" role="tab" id="heading-{{ this.cid }}">
     <h4 class="panel-title">
+      <input type="checkbox" data-hook="field-selected" name="fields" value="{{ this.model.name }}" checked="checked">
       <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ this.cid }}" aria-expanded="false" aria-controls="#collapse-{{ this.cid }}">
         {{ this.model.name }}
       </a>

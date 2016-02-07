@@ -30,8 +30,8 @@ const PageLayoutView = View.extend({
         return new FieldListView({model: this.model})
       }
     },
-    query: {
-      selector: '[data-hook=query]',
+    preview: {
+      selector: '[data-hook=preview]',
       prepareView: function () {
         return new QueryView({model: this.model.query})
       }
