@@ -10,24 +10,6 @@ const QueryModel = State.extend({
     whereFilters: ['object', false, function () { return {} }]
   },
   derived: {
-    // outFieldsString: {
-    //   deps: ['outFields'],
-    //   fn: function () {
-    //     // If outFields hasn't been defined yet or it's the same number of fields as the parent's fields collection
-    //     // TODO: this is pretty tight coupling... any better approach?
-    //     if (!this.outFields || this.outFields.length === this.parent.fields.length) {
-    //       return '*'
-    //     } else {
-    //       return this.outFields.join(', ')
-    //     }
-    //   }
-    // },
-    // whereString: {
-    //   deps: ['where'],
-    //   fn: function () {
-    //     return isEmpty(this.where) ? '1=1' : values(this.where).join(' AND ')
-    //   }
-    // }
     totalFields: {
       deps: ['parent.fields'],
       fn: function () {
